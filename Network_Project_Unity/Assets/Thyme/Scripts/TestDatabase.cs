@@ -9,6 +9,8 @@ public class TestDatabase : MonoBehaviour
 
     public Text emailInput, passwordInput;
     public Text debugForUser;
+    public GameObject image;
+    public bool checkError = true;
 
     public void Login()
     {
@@ -39,6 +41,7 @@ public class TestDatabase : MonoBehaviour
             {
 
                 Debug.Log("Login Completed!");
+                checkError = false;
             }
 
         }));
@@ -73,6 +76,7 @@ public class TestDatabase : MonoBehaviour
             {
 
                 Debug.Log("Register Completed!");
+                checkError = false;
             }
         }));
     }
@@ -100,6 +104,8 @@ public class TestDatabase : MonoBehaviour
             {
 
                 Debug.Log("Login with Anonymous Completed!");
+                checkError = false;
+
             }
         }));
     }
@@ -118,8 +124,24 @@ public class TestDatabase : MonoBehaviour
         msg = errorCode.ToString();
         debugForUser.text = msg;
         Debug.Log(msg);
-        
 
+
+    }
+
+    void Update()
+    {
+        CheckCloseUI();
+    }
+    void CheckCloseUI()
+    {
+        if (checkError == true)
+        {
+            return;
+        }
+        else
+        {
+            image.SetActive(false);
+        }
     }
 
 

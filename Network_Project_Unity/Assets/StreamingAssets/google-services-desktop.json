@@ -2,6 +2,7 @@
   "project_info": {
     "project_number": "1013848956258",
     "project_id": "networkproject-58995",
+    "firebase_url":"https://networkproject-58995-default-rtdb.asia-southeast1.firebasedatabase.app/",
     "storage_bucket": "networkproject-58995.appspot.com"
   },
   "client": [
