@@ -9,6 +9,7 @@ public class TestDatabase : MonoBehaviour
 
     public Text emailInput, passwordInput;
     public Text debugForUser;
+    public GameObject connectLobby;
 
     public void Login()
     {
@@ -37,8 +38,9 @@ public class TestDatabase : MonoBehaviour
 
             else if (task.IsCompleted)
             {
-
+                
                 Debug.Log("Login Completed!");
+
             }
 
         }));
@@ -72,14 +74,16 @@ public class TestDatabase : MonoBehaviour
             else if (task.IsCompleted)
             {
 
+                
                 Debug.Log("Register Completed!");
+
             }
         }));
     }
 
     public void Anonymous()
     {
-        FirebaseAuth.DefaultInstance.SignInAnonymouslyAsync().ContinueWith((task =>
+        FirebaseAuth.DefaultInstance.SignInAnonymouslyAsync().ContinueWith(task =>
         {
 
             if (task.IsCanceled)
@@ -98,17 +102,22 @@ public class TestDatabase : MonoBehaviour
 
             else if (task.IsCompleted)
             {
-
+                
                 Debug.Log("Login with Anonymous Completed!");
+                debugForUser.text = "Login with Anonymous Completed!";
+                connectLobby.SetActive(false);
+
             }
-        }));
+        });
     }
 
     public void Logout()
     {
         if (FirebaseAuth.DefaultInstance.CurrentUser != null)
         {
+            
             FirebaseAuth.DefaultInstance.SignOut();
+            connectLobby.SetActive(true);
         }
     }
 
@@ -116,7 +125,6 @@ public class TestDatabase : MonoBehaviour
     {
         string msg = "";
         msg = errorCode.ToString();
-        debugForUser.text = msg;
         Debug.Log(msg);
         
 
