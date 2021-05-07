@@ -155,7 +155,8 @@ MonoBehaviour:
   emailInput: {fileID: 1403824419}
   passwordInput: {fileID: 2086141287}
   debugForUser: {fileID: 1072280177}
-  connectLobby: {fileID: 0}
+  image: {fileID: 1973733439}
+  checkError: 1
 --- !u!4 &118406727
 Transform:
   m_ObjectHideFlags: 0
@@ -1232,7 +1233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1602329950
 RectTransform:
   m_ObjectHideFlags: 0

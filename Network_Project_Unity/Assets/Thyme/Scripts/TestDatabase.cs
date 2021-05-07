@@ -9,7 +9,8 @@ public class TestDatabase : MonoBehaviour
 
     public Text emailInput, passwordInput;
     public Text debugForUser;
-    public GameObject connectLobby;
+    public GameObject image;
+    public bool checkError = true;
 
     public void Login()
     {
@@ -38,9 +39,9 @@ public class TestDatabase : MonoBehaviour
 
             else if (task.IsCompleted)
             {
-                
-                Debug.Log("Login Completed!");
 
+                Debug.Log("Login Completed!");
+                checkError = false;
             }
 
         }));
@@ -74,16 +75,15 @@ public class TestDatabase : MonoBehaviour
             else if (task.IsCompleted)
             {
 
-                
                 Debug.Log("Register Completed!");
-
+                checkError = false;
             }
         }));
     }
 
     public void Anonymous()
     {
-        FirebaseAuth.DefaultInstance.SignInAnonymouslyAsync().ContinueWith(task =>
+        FirebaseAuth.DefaultInstance.SignInAnonymouslyAsync().ContinueWith((task =>
         {
 
             if (task.IsCanceled)
@@ -102,22 +102,19 @@ public class TestDatabase : MonoBehaviour
 
             else if (task.IsCompleted)
             {
-                
+
                 Debug.Log("Login with Anonymous Completed!");
-                debugForUser.text = "Login with Anonymous Completed!";
-                connectLobby.SetActive(false);
+                checkError = false;
 
             }
-        });
+        }));
     }
 
     public void Logout()
     {
         if (FirebaseAuth.DefaultInstance.CurrentUser != null)
         {
-            
             FirebaseAuth.DefaultInstance.SignOut();
-            connectLobby.SetActive(true);
         }
     }
 
@@ -125,9 +122,26 @@ public class TestDatabase : MonoBehaviour
     {
         string msg = "";
         msg = errorCode.ToString();
+        debugForUser.text = msg;
         Debug.Log(msg);
-        
 
+
+    }
+
+    void Update()
+    {
+        CheckCloseUI();
+    }
+    void CheckCloseUI()
+    {
+        if (checkError == true)
+        {
+            return;
+        }
+        else
+        {
+            image.SetActive(false);
+        }
     }
 
 
